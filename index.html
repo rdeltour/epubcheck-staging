@@ -146,7 +146,7 @@ select {
 }
 
 body {
-  background: #ffffff;
+  background: #fafafa;
   color: #3d3838;
   font-size: 1.33rem;
   min-height: 100vh;
@@ -158,8 +158,17 @@ body > * {
   width: 100%;
 }
 
+a:not([class]) {
+  color: currentColor;
+  text-decoration-color: #85B916;
+}
+
+a:not([class]):hover {
+  box-shadow: 0 5px 0 #85B916;
+}
+
 :focus {
-  outline: 4px solid red;
+  outline: 4px solid #85B916;
   outline-offset: 0.25rem;
 }
 
@@ -174,14 +183,18 @@ h1, h2, h3, h4, h5, h6 {
 .button {
   display: inline-block;
   padding: 0.5rem 1.5rem;
-  background: red;
-  color: blue;
-  border: 2px solid;
+  background: #85B916;
+  color: #3d3838;
+  box-shadow: 5px 5px 0 #3d3838;
   text-transform: uppercase;
   text-decoration: none;
   text-align: center;
   font-weight: 900;
 }
+.button:hover {
+  box-shadow: 0 0 0 5px #3d3838;
+}
+
 .footer-nav {
   text-align: center;
 }
@@ -205,7 +218,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .site-footer {
   margin-top: auto;
-  background: red;
+  border-top: 5px solid #85B916;
   padding: 2.352637rem 0;
   font-size: 1rem;
 }
@@ -262,7 +275,7 @@ h1, h2, h3, h4, h5, h6 {
   top: 100%;
   left: 0;
   margin-top: 0.25rem;
-  background: red;
+  background: #85B916;
 }
 
 .skip-link {
@@ -279,7 +292,7 @@ h1, h2, h3, h4, h5, h6 {
  * RADIUS
  * Applies rounded corners on borders
  */
-.radius, .button {
+.radius {
   border-radius: 0.25rem;
 }
 
@@ -320,6 +333,7 @@ h1, h2, h3, h4, h5, h6 {
   grid-template-columns: 1fr min(70rem, 100%) 1fr;
   grid-template-rows: auto 2.352637rem auto 4.705274rem;
   background: #ededed;
+  margin-bottom: 2.352637rem;
 }
 .intro > * {
   grid-column: 2;
@@ -332,7 +346,7 @@ h1, h2, h3, h4, h5, h6 {
 .intro__title {
   justify-self: start;
   min-width: 60%;
-  padding: 1.7689rem 1.7689rem;
+  padding: 2.352637rem 2.352637rem;
   display: flex;
   align-items: center;
   font-weight: 700;
@@ -357,7 +371,7 @@ h1, h2, h3, h4, h5, h6 {
   justify-self: end;
   min-width: 60%;
   text-align: right;
-  padding: 3.12900721rem 1.7689rem;
+  padding: 3.12900721rem 2.352637rem;
   font-size: 2.352637rem;
   font-weight: 600;
 }
@@ -373,6 +387,33 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: -4.705274rem;
 }
 
+.home-invite {
+  padding: 2.352637rem;
+}
+
+.home-features {
+  background-color: #85B916;
+}
+.home-features__inner {
+  display: flex;
+  flex-wrap: wrap;
+  flex: 0 0 auto;
+  justify-content: space-between;
+}
+.home-features__item {
+  margin: 2.352637rem;
+  width: 20em;
+}
+.home-features__item h3 {
+  text-align: center;
+  margin-bottom: 1.33rem;
+}
+.home-features__item__content {
+  background-color: #fafafa;
+  padding: 2.352637rem;
+  box-shadow: 5px 5px 0 #3d3838;
+}
+
     
   </style>
 
@@ -380,6 +421,11 @@ h1, h2, h3, h4, h5, h6 {
 
 
 
+
+<link rel="stylesheet" href="/epubcheck-staging/css/site.css" media="print" onload="this.media='all'">
+<noscript>
+  <link rel="stylesheet" href="/epubcheck-staging/css/site.css">
+</noscript>
 
 
 
@@ -455,53 +501,54 @@ h1, h2, h3, h4, h5, h6 {
 			<a class="button" href="https://github.com/w3c/epubcheck/releases/download/v4.2.4/epubcheck-4.2.4.zip" >Download</a><br/>
 		</div>
 	</div>
-	<div class="wrapper">
-	<p>EPUBCheck is a command line tool. Unzip the downloaded package, open a terminal program, and start checking your EPUB files!</p>
-
-<code>java -jar epubcheck.jar moby.dick.epub</code>
-<p>Learn more on <a href="get-started/">how to get started</a></p>
-
-	<div class="features">
-<h2 class="visually-hidden">Features</h2>
-
-  <div class="features__item">
-    <h3>Open Source.</h3>
-    <div class="features__item__content">
-      <p>EPUBCheck is open source, licensed under MIT.</p>
-<p>EPUBCheck is a W3C project maintained by the DAISY Consortium.</p>
-
-    </div>
-  </div>
-
-  <div class="features__item">
-    <h3>Standard.</h3>
-    <div class="features__item__content">
-      <p>EPUBCheck evaluates EPUB publications against the official EPUB specifications.</p>
-<p>It supports both <a href="">EPUB 2</a> and <a href="">EPUB 3</a>.</p>
-
-    </div>
-  </div>
-
-  <div class="features__item">
-    <h3>Internationalized.</h3>
-    <div class="features__item__content">
-      <p>EPUBCheck is translated in a varierty of languages.</p>
-<p>You can help to <a href="">contribute to the localization effort</a>!</p>
-
-    </div>
-  </div>
-
-  <div class="features__item">
-    <h3>Looking for an app?</h3>
-    <div class="features__item__content">
-      <p>EPUBCheck is distributed as a command line tool or a Java library.</p>
-<p>If you prefer using an app, see this list of <a href="">third-party tools integrating EPUBCheck</a>!</p>
-
-    </div>
-  </div>
+	<div class="home-invite | wrapper">
+  <p>EPUBCheck is a command line tool. Unzip the downloaded package, open a terminal program, and start checking your EPUB files!</p>
+  <pre class="language-shell-session"><code class="language-shell-session"><span class="token output">java -jar epubcheck.jar moby.dick.epub</span></code></pre>
+  <p>Learn more on <a href="get-started/">how to get started</a></p>
 
 </div>
-	</div>
+	<div class="home-features">
+<h2 class="visually-hidden">Features</h2>
+<div class="home-features__inner | wrapper">
+  
+    <div class="home-features__item">
+      <h3>Open Source.</h3>
+      <div class="home-features__item__content">
+        <p>EPUBCheck is open source, licensed under MIT.</p>
+<p>EPUBCheck is a W3C project maintained by the DAISY Consortium.</p>
+
+      </div>
+    </div>
+  
+    <div class="home-features__item">
+      <h3>Standard.</h3>
+      <div class="home-features__item__content">
+        <p>EPUBCheck evaluates EPUB publications against the official EPUB specifications.</p>
+<p>It supports both <a href="">EPUB 2</a> and <a href="">EPUB 3</a>.</p>
+
+      </div>
+    </div>
+  
+    <div class="home-features__item">
+      <h3>Internationalized.</h3>
+      <div class="home-features__item__content">
+        <p>EPUBCheck is translated in a varierty of languages.</p>
+<p>You can help to <a href="">contribute to the localization effort</a>!</p>
+
+      </div>
+    </div>
+  
+    <div class="home-features__item">
+      <h3>Looking for an app?</h3>
+      <div class="home-features__item__content">
+        <p>EPUBCheck is distributed as a command line tool or a Java library.</p>
+<p>If you prefer using an app, see this list of <a href="">third-party tools integrating EPUBCheck</a>!</p>
+
+      </div>
+    </div>
+  
+</div>
+</div>
 </main>
 
 

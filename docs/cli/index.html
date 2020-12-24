@@ -143,7 +143,7 @@ select {
 }
 
 body {
-  background: #ffffff;
+  background: #fafafa;
   color: #3d3838;
   font-size: 1.33rem;
   min-height: 100vh;
@@ -155,8 +155,17 @@ body > * {
   width: 100%;
 }
 
+a:not([class]) {
+  color: currentColor;
+  text-decoration-color: #85B916;
+}
+
+a:not([class]):hover {
+  box-shadow: 0 5px 0 #85B916;
+}
+
 :focus {
-  outline: 4px solid red;
+  outline: 4px solid #85B916;
   outline-offset: 0.25rem;
 }
 
@@ -171,14 +180,18 @@ h1, h2, h3, h4, h5, h6 {
 .button {
   display: inline-block;
   padding: 0.5rem 1.5rem;
-  background: red;
-  color: blue;
-  border: 2px solid;
+  background: #85B916;
+  color: #3d3838;
+  box-shadow: 5px 5px 0 #3d3838;
   text-transform: uppercase;
   text-decoration: none;
   text-align: center;
   font-weight: 900;
 }
+.button:hover {
+  box-shadow: 0 0 0 5px #3d3838;
+}
+
 .footer-nav {
   text-align: center;
 }
@@ -202,7 +215,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .site-footer {
   margin-top: auto;
-  background: red;
+  border-top: 5px solid #85B916;
   padding: 2.352637rem 0;
   font-size: 1rem;
 }
@@ -259,7 +272,7 @@ h1, h2, h3, h4, h5, h6 {
   top: 100%;
   left: 0;
   margin-top: 0.25rem;
-  background: red;
+  background: #85B916;
 }
 
 .skip-link {
@@ -276,7 +289,7 @@ h1, h2, h3, h4, h5, h6 {
  * RADIUS
  * Applies rounded corners on borders
  */
-.radius, .button {
+.radius {
   border-radius: 0.25rem;
 }
 
@@ -331,6 +344,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .page-content {
   line-height: 1.3;
+  padding-bottom: 2.352637rem;
 }
 .page-content > * {
   max-width: 65ch;
@@ -387,12 +401,17 @@ h1, h2, h3, h4, h5, h6 {
 
 .toc {
   line-height: 1.1;
+  margin: 2.352637rem 0;
 }
 .toc * {
   font-size: 1.33rem;
 }
 .toc h2 {
   font-variant: small-caps;
+  margin-top: 1.33rem;
+}
+.toc a {
+  text-decoration: none;
 }
 .toc button {
   all: inherit;
@@ -432,6 +451,11 @@ pre {
 
 
 
+
+<link rel="stylesheet" href="/epubcheck-staging/css/site.css" media="print" onload="this.media='all'">
+<noscript>
+  <link rel="stylesheet" href="/epubcheck-staging/css/site.css">
+</noscript>
 
 
 
@@ -846,17 +870,14 @@ This option if off by default.</p>
 <h2 id="usage"><a class="direct-link" href="#usage">§</a> Usage</h2>
 <h3 id="checking-an-epub-publication"><a class="direct-link" href="#checking-an-epub-publication">§</a> Checking an EPUB publication</h3>
 <p>You can check a packaged EPUB publication with the command:</p>
-<pre><code class="language-sh">epubcheck publication.epub
-</code></pre>
+<pre class="language-shell-session"><code class="language-shell-session"><span class="token output">epubcheck publication.epub</code></pre>
 <p>Sometimes it is convenient to check an expanded (unpackaged) EPUB publication directory.
 In such case you can use the command:</p>
-<pre><code class="language-sh">epubcheck --mode exp publication/
-</code></pre>
+<pre class="language-shell-session"><code class="language-shell-session"><span class="token output">epubcheck --mode exp publication/</code></pre>
 <p>When using expanded mode, you can use the <code>--save</code> option to create a packaged EPUB (<code>.epub</code> file) after running the checks.</p>
 <h3 id="checking-a-single-epub-document"><a class="direct-link" href="#checking-a-single-epub-document">§</a> Checking a single EPUB document</h3>
 <p>In addition to checking full EPUB publication, you can also check individual files contained in an EPUB, with the <code>--mode</code> option:</p>
-<pre><code class="language-sh">epubcheck &lt;path to file&gt; --mode &lt;mode&gt; -v &lt;version&gt;
-</code></pre>
+<pre class="language-shell-session"><code class="language-shell-session"><span class="token output">epubcheck &lt;path to file> --mode &lt;mode> -v &lt;version></code></pre>
 <p>The mode argument must be of the following:</p>
 <ul>
 <li><strong><code>opf</code></strong> to check a package document</li>
@@ -877,8 +898,7 @@ The supported versions are:</p>
 </aside>
 <h3 id="specifying-a-profile"><a class="direct-link" href="#specifying-a-profile">§</a> Specifying a profile</h3>
 <p>You can specify a profile to enable the extra checks for the EPUB specification extensions, with the <code>--profile</code> option:</p>
-<pre><code class="language-sh">epubcheck &lt;path to file&gt; -profile &lt;profile&gt;
-</code></pre>
+<pre class="language-shell-session"><code class="language-shell-session"><span class="token output">epubcheck &lt;path to file> -profile &lt;profile></code></pre>
 <p>The supported profiles are:</p>
 <ul>
 <li><code>default</code>: check the rules defined in the EPUB specifications (default)</li>
@@ -901,11 +921,9 @@ This can be helpful for instance when you want to further process it within a pr
 </ul>
 <p>The report can besaved to a file (specified as a path argument to the output format option), or printed to the standard output (when using <code>-</code> as the output format argument).</p>
 <p>For example, to save a report in JSON, use the command:</p>
-<pre><code class="language-sh">epubcheck --json output.json file.epub
-</code></pre>
+<pre class="language-shell-session"><code class="language-shell-session"><span class="token output">epubcheck --json output.json file.epub</code></pre>
 <p>To print a JSON report to the standard output, use the command:</p>
-<pre><code class="language-sh">epubcheck --json - file.epub
-</code></pre>
+<pre class="language-shell-session"><code class="language-shell-session"><span class="token output">epubcheck --json - file.epub</code></pre>
 <p>You can read more about EPUBCheck reports in the <a href="/epubcheck-staging/docs/report">reporting guide</a>!</p>
 <h2 id="any-difficulty"><a class="direct-link" href="#any-difficulty">§</a> Any difficulty?</h2>
 <p>If you face any issue when using the EPUBCheck command line program, you can check our <a href="/epubcheck-staging/docs/troubleshooting">troubleshooting guide</a>, or try to <a href="/epubcheck-staging/docs/support">get help</a>!</p>

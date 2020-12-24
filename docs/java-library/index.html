@@ -143,7 +143,7 @@ select {
 }
 
 body {
-  background: #ffffff;
+  background: #fafafa;
   color: #3d3838;
   font-size: 1.33rem;
   min-height: 100vh;
@@ -155,8 +155,17 @@ body > * {
   width: 100%;
 }
 
+a:not([class]) {
+  color: currentColor;
+  text-decoration-color: #85B916;
+}
+
+a:not([class]):hover {
+  box-shadow: 0 5px 0 #85B916;
+}
+
 :focus {
-  outline: 4px solid red;
+  outline: 4px solid #85B916;
   outline-offset: 0.25rem;
 }
 
@@ -171,14 +180,18 @@ h1, h2, h3, h4, h5, h6 {
 .button {
   display: inline-block;
   padding: 0.5rem 1.5rem;
-  background: red;
-  color: blue;
-  border: 2px solid;
+  background: #85B916;
+  color: #3d3838;
+  box-shadow: 5px 5px 0 #3d3838;
   text-transform: uppercase;
   text-decoration: none;
   text-align: center;
   font-weight: 900;
 }
+.button:hover {
+  box-shadow: 0 0 0 5px #3d3838;
+}
+
 .footer-nav {
   text-align: center;
 }
@@ -202,7 +215,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .site-footer {
   margin-top: auto;
-  background: red;
+  border-top: 5px solid #85B916;
   padding: 2.352637rem 0;
   font-size: 1rem;
 }
@@ -259,7 +272,7 @@ h1, h2, h3, h4, h5, h6 {
   top: 100%;
   left: 0;
   margin-top: 0.25rem;
-  background: red;
+  background: #85B916;
 }
 
 .skip-link {
@@ -276,7 +289,7 @@ h1, h2, h3, h4, h5, h6 {
  * RADIUS
  * Applies rounded corners on borders
  */
-.radius, .button {
+.radius {
   border-radius: 0.25rem;
 }
 
@@ -331,6 +344,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .page-content {
   line-height: 1.3;
+  padding-bottom: 2.352637rem;
 }
 .page-content > * {
   max-width: 65ch;
@@ -387,12 +401,17 @@ h1, h2, h3, h4, h5, h6 {
 
 .toc {
   line-height: 1.1;
+  margin: 2.352637rem 0;
 }
 .toc * {
   font-size: 1.33rem;
 }
 .toc h2 {
   font-variant: small-caps;
+  margin-top: 1.33rem;
+}
+.toc a {
+  text-decoration: none;
 }
 .toc button {
   all: inherit;
@@ -432,6 +451,11 @@ pre {
 
 
 
+
+<link rel="stylesheet" href="/epubcheck-staging/css/site.css" media="print" onload="this.media='all'">
+<noscript>
+  <link rel="stylesheet" href="/epubcheck-staging/css/site.css">
+</noscript>
 
 
 
@@ -728,37 +752,21 @@ You will find the EPUBCheck public interfaces in the <code>com.adobe.epubcheck.a
 <p>The <code>EPUBCheck</code> class implements the EPUBCheck processing engine.
 You will typically call EPUBCheck by calling the <code>validate()</code> method on an instance of this <code>EPUBCheck</code> class.</p>
 <p>Here is a basic example of how to call EPUBCheck programmatically:</p>
-<pre><code class="language-java">File epubFile = new File(&quot;/path/to/your/epub/file.epub&quot;);
-
-// simple constructor; errors are printed on stderr stream
-EPUBCheck epubcheck = new EPUBCheck(epubFile);
-
-// validate() returns true if no errors or warnings are found
-boolean result = epubcheck.validate();
-</code></pre>
+<pre class="language-java"><code class="language-java"><span class="token class-name">File</span> epubFile <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">File</span><span class="token punctuation">(</span><span class="token string">"/path/to/your/epub/file.epub"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><br><span class="token comment">// simple constructor; errors are printed on stderr stream</span><br><span class="token class-name">EPUBCheck</span> epubcheck <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">EPUBCheck</span><span class="token punctuation">(</span>epubFile<span class="token punctuation">)</span><span class="token punctuation">;</span><br><br><span class="token comment">// validate() returns true if no errors or warnings are found</span><br><span class="token keyword">boolean</span> result <span class="token operator">=</span> epubcheck<span class="token punctuation">.</span><span class="token function">validate</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
 <p>The official ZIP distribution contains all you need to use EPUBCheck as a library: the <code>epubcheck.jar</code> Java archive for EPUBCheck, and all its dependencies in the <code>lib</code> directory.</p>
 <h2 id="using-epubcheck-in-your-build"><a class="direct-link" href="#using-epubcheck-in-your-build">§</a> Using EPUBCheck in your build</h2>
 <p>In addition to being released as a ZIP archive on GitHub, EPUBCheck is also officially published to the <a href="https://search.maven.org/artifact/org.w3c/epubcheck">Maven Central Repository</a>.</p>
 <p>EPUBCheck’s Maven group ID is <code>org.w3c</code> and its artifact ID is <code>epubcheck</code>. You can copy the snippets below to add a dependency to EPUBCheck in your build system of choice:</p>
 <h3 id="maven"><a class="direct-link" href="#maven">§</a> Maven</h3>
-<pre><code class="language-xml">&lt;dependency&gt;
-    &lt;groupId&gt;org.w3c&lt;/groupId&gt;
-    &lt;artifactId&gt;epubcheck&lt;/artifactId&gt;
-    &lt;version&gt;4.2.4&lt;/version&gt;
-&lt;/dependency&gt;
-</code></pre>
+<pre class="language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span><span class="token punctuation">></span></span><br>    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>groupId</span><span class="token punctuation">></span></span>org.w3c<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>groupId</span><span class="token punctuation">></span></span><br>    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>artifactId</span><span class="token punctuation">></span></span>epubcheck<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>artifactId</span><span class="token punctuation">></span></span><br>    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>version</span><span class="token punctuation">></span></span>4.2.4<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>version</span><span class="token punctuation">></span></span><br><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>dependency</span><span class="token punctuation">></span></span></code></pre>
 <h3 id="gradle"><a class="direct-link" href="#gradle">§</a> Gradle</h3>
-<pre><code class="language-groovy">compile group: 'org.w3c', name: 'epubcheck', version: '4.2.4'
-</code></pre>
+<pre class="language-groovy"><code class="language-groovy">compile group<span class="token punctuation">:</span> <span class="token string">'org.w3c'</span><span class="token punctuation">,</span> name<span class="token punctuation">:</span> <span class="token string">'epubcheck'</span><span class="token punctuation">,</span> version<span class="token punctuation">:</span> <span class="token string">'4.2.4'</span></code></pre>
 <h3 id="ivy"><a class="direct-link" href="#ivy">§</a> Ivy</h3>
-<pre><code class="language-xml">&lt;dependency org=&quot;org.w3c&quot; name=&quot;epubcheck&quot; rev=&quot;4.2.4&quot; /&gt;
-</code></pre>
+<pre class="language-xml"><code class="language-xml"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>dependency</span> <span class="token attr-name">org</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>org.w3c<span class="token punctuation">"</span></span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>epubcheck<span class="token punctuation">"</span></span> <span class="token attr-name">rev</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>4.2.4<span class="token punctuation">"</span></span> <span class="token punctuation">/></span></span></code></pre>
 <h3 id="buildr"><a class="direct-link" href="#buildr">§</a> Buildr</h3>
-<pre><code class="language-ruby">compile.with 'org.w3c:epubcheck:jar:4.2.4'
-</code></pre>
+<pre class="language-ruby"><code class="language-ruby">compile<span class="token punctuation">.</span>with <span class="token string">'org.w3c:epubcheck:jar:4.2.4'</span></code></pre>
 <h3 id="sbt"><a class="direct-link" href="#sbt">§</a> SBT</h3>
-<pre><code class="language-scala">libraryDependencies += &quot;org.w3c&quot; % &quot;epubcheck&quot; % &quot;4.2.4&quot;
-</code></pre>
+<pre class="language-scala"><code class="language-scala">libraryDependencies <span class="token operator">+=</span> <span class="token string">"org.w3c"</span> <span class="token operator">%</span> <span class="token string">"epubcheck"</span> <span class="token operator">%</span> <span class="token string">"4.2.4"</span></code></pre>
 
 			</main>
 		</div>
